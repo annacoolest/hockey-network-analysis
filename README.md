@@ -44,11 +44,11 @@ Now that we have the data, let's look at a brief overview of each player's indiv
 
 After some formatting of our data, we get two barplots:
 
-![Barplot of Tampa Bay Lightning players's points scored, sorted by goals and assists.](tb_points.png)
+![Barplot of Tampa Bay Lightning players's points scored, sorted by goals and assists.](tb_barplot.png)
 
 Here, we can see that the top goal scorer was Ondrej Palat, with 3 goals. He and Victor Hedman tied for the most points scored, with each scoring 5. Victor Hedman is a defenseman, so his offensive impact is notable. Tampa Bay's highest point-scorers had less points than Colorado's highest-point scorers, which makes sense because Colorado scored more points in the series. Fewer people on Tampa Bay also scored points, with 16 point-scorers as opposed to Colorado's 18.
 
-![Barplot of Colorado Avalanche players's points scored, sorted by goals and assists.](avs_points.png)
+![Barplot of Colorado Avalanche players's points scored, sorted by goals and assists.](avs_barplot.png)
 
 For the Avalanche, the top scorer was Valeri Nichuskin, with 4 goals. The two top points scorers were Mikko Rantanen, with 8 points, and Cale Makar, with 7. Cale Makar, like Victor Hedman, is a defenseman, so his offensive skill is something to watch out for. Another unique player is goalie Darcy Kuemper, who managed to score an assist on an empty-net goal. Colorado had more overall point-scorers, with 18 as opposed to Tampa Bay's 16, and its' leading point-scorers scored more points overall (8 for Colorado and 5 for Tampa Bay). 
 
@@ -117,6 +117,7 @@ We'll start with the number of nodes in each network:
 print(paste("Number of Nodes in the Colorado Avalanche Points Network: ", vcount(avs_g)))
 print(paste("Number of Nodes in the Tampa Bay Lightning Points Network: ", vcount(tb_g)))
 ```
+![The number of nodes in each network (specified below).](num_nodes.png)
 
 The number of nodes in the Colorado Avalanche points network is 19. This means that out of their [23 rostered players](https://www.eliteprospects.com/team/57/colorado-avalanche/stats/2021-2022/playoffs) in the playoffs, only 18 scored points (19 nodes minus opposing goalie).
 
@@ -133,6 +134,7 @@ Now, let's look at the networks' density:
 print(paste("Density of the Colorado Avalanche Points Network: ", edge_density(avs_g)))
 print(paste("Density of the Tampa Bay Lightning Points Network: ", edge_density(tb_g)))
 ```
+![The density in each network (specified below).](density.png)
 
 A network's density value is the proportion of the number of connections in the network/the number of possible connections ( [U.G.N.A.R](https://link.springer.com/book/10.1007/978-3-319-23883-8), page 14). Because the network is directed, there are two possible connections between every two nodes--a pass from Makar to MacKinnon and a pass from MacKinnon to Makar are counted as two separate connections. In both cases, the networks are not very dense; Colorado has a density score of 0.123 and Tampa Bay has a score of 0.125. This is probably a sign that the number of goals scored compared to the number of players involved is relatively small--if we were looking at goals and assists over an entire season, the density would be significantly higher. This low density is consistent with a study by [Clemente et al., (2015)](https://www.researchgate.net/profile/Filipe-Clemente/publication/282443736_How_team_sports_behave_as_a_team_General_network_metrics_applied_to_sports_analysis/links/561056ef08ae48337519f1cf/How-team-sports-behave-as-a-team-General-network-metrics-applied-to-sports-analysis.pdf) which showed that of all sports passing networks, ice hockey had the lowest density scores. It was hypothesized that this is due to the goaltender not participating in passing plays.
 
@@ -149,6 +151,8 @@ print(paste("Number of Components in the Colorado Avalanche Points Network: ", c
 print(paste("Number of Components in the Tampa Bay Lightning Points Network: ", count_components(tb_g)))
 ```
 
+![The number of components in each network (specified below).](components.png)
+
 In this case, both networks have only 1 component, indicating that there is no significant separation between players on either team.
 
 ### Diameter
@@ -160,7 +164,7 @@ The diameter of a network is a measure of the network's compactness. This value 
 print(paste("Diameter of the Colorado Avalanche Points Network: ", diameter(avs_g)))
 print(paste("Diameter of the Tampa Bay Lightning Points Network: ", diameter(tb_g)))
 ```
-
+![The diameter of each network (specified below).](diameter.png)
 
 The diameters for the Colorado Avalanche and Tampa Bay Lightning are 7 and 6, respectively. This means that Tampa Bay's passing network is more compact in terms of the players participating in scoring points. This could indicate that Tampa Bay's passing structure is more efficient, or it could also be a mark of having less depth scoring.
 
@@ -174,26 +178,27 @@ Clustering is the tendency to form closed triangles in social networks. Transiti
 print(paste("Transitivity of the Colorado Avalanche Points Network: ", transitivity(avs_g)))
 print(paste("Transitivity of the Tampa Bay Lightning Points Network: ", transitivity(tb_g)))
 ```
+![The transitivity in each network (specified below).](transitivity.png)
 
 For the Colorado Avalanche and Tampa Bay Lightning, the transitivity values are 0.379 and 0.403, respectively. This indicates that Tampa Bay has a stronger tendency of forming clusters within players. This, along with Tampa Bay's smaller diameter and higher density, points to Tampa Bay having less depth in who is passing to one another. These also may be artifacts of Tampa Bay having less point-scorers and fewer points overall.
 
 
 ### Eigenvector Centrality
 
-![Colorado Avalanche Players' Eigenvector Centrality Scores, sorted from highest to lowest.](tb_points.png)
+![Colorado Avalanche Players' Eigenvector Centrality Scores, sorted from highest to lowest.](avs_eig_cen.png)
 
 Eigenvector centrality calculates the extent to which nodes are connected to other well-connected nodes. Cale Makar has the highest Eigenvector centrality, which means that he is often connected to plays with other top scorers. Cale Makar won the [Conn Smythe](https://www.nhlpa.com/news/2-31722/avalanche-d-man-cale-makar-wins-conn-smythe-as-playoff-mvp) (most valuable player in the playoffs award) for his outstanding defensive and offensive ability despite not having the highest points or goals total. His high Eigenvector centrality shows that this award was well deserved--he was the most central player in all of the Avalanche's successful plays.
 
 Mikko Rantanen, the Avalanche's top points scorer (8 points) and Valeri Nichuskin, the Avalanche's top goal scorer (4 goals) are next, indicating that they make up a significant portion of successful goals and plays as well. 
 
-![Tampa Bay Lightning Players' Eigenvector Centrality Scores, sorted from highest to lowest.](tb_points.png)
+![Tampa Bay Lightning Players' Eigenvector Centrality Scores, sorted from highest to lowest.](tb_eig_cen.png)
 
 
 Ondrej Palat has the highest Eigenvector centrality score on the Tampa Bay Lightning, which makes sense since he scored the most goals (3) and is tied for the most points (5). He is part of the most plays, and his plays typically involve other high scorers such as Steven Stamkos and Nikita Kucherov. Additionally, Ondrej Palat scored many goals at key times for Tampa Bay, most notably scoring the [game-winning goal](https://www.nytimes.com/athletic/3489675/2022/06/25/2022-stanley-cup-final-ondrej-palats-late-goal-lifts-lightning-to-game-5-win/) in Game 5 to stave off Tampa Bay's elimination.
 
 ### Betweenness
 
-![Colorado Players' Betweenness Centrality Scores, sorted from highest to lowest.](tb_points.png)
+![Colorado Players' Betweenness Centrality Scores, sorted from highest to lowest.](avs_bet_cen.png)
 
 Betweenness centrality is a measure of the extent that a node is present on the shortest path between other nodes. If a node has the highest betweenness centrality score, that means that it is the strongest connector of other nodes. In the 2017 RIT Hockey Analytics Conference, hockey analyst Stephen Burtch [highlighted](https://hockey-graphs.com/2015/11/09/the-2015-ohl-final-part-one-erie-otters-passing-network/) betweenness centrality in passing networks as a marker of how the team would suffer if the player was removed.
 
@@ -201,7 +206,7 @@ It is fascinating that Andrew Cogliano is the person with the highest betweennes
 
 Cale Makar's betweenness centrality score is also notable--as an offensive defenseman, his role is typically to take the puck away from the opposing team and either score or give it to someone else who can. His high betweenness score demonstrates his effectiveness as a connector in many successful plays, further making a case for playoff MVP.
 
-![Tampa Bay Players' Betweenness Centrality Scores, sorted from highest to lowest.](tb_points.png)
+![Tampa Bay Players' Betweenness Centrality Scores, sorted from highest to lowest.](tb_bet_cen.png)
 
 Most notably, the betweenness centrality scores for Tampa Bay are much lower than those of the Colorado Avalanche. This may imply that players are less well-connected to one another and have used their passing less effectively. It is notable that two defenseman are part of their top 3, though. This highlights how good defensemen are not only able to keep goals from being scored, but they are also able to effectively set up offensive plays. Hedman and Sergachev are standout defensemen in the league for precicely this reason. 
 
