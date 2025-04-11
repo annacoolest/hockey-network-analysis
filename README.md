@@ -31,9 +31,11 @@ hockeydata <- read.csv("2022_stanley_cup_final.csv")
 #show the first 6 rows
 head(hockeydata)
 ```
+hockey-network-analysis
+/data example.png
 
-
-![A network showing every Colorado Avalanche player that scored a point during the Stanley Cup Final, connected by the passes they made to score the points.]( )
+![A Google Sheets spreadsheet with columns for player_1 (the passer), player_2 (the reciever), the game number, and the team of the players.](hockey-network-analysis
+/data example.png)
 
 
 Here, the player *making* the pass is player 1, and the player *receiving* the pass is player 2. If a goal is scored, than the player receiving the pass is the goalie from the opposing team, marked with "G". This edgelist format was inspired by hockey analyst Ryan Stimson's 2015 passing [network analysis](https://hockey-graphs.com/2015/11/09/the-2015-ohl-final-part-one-erie-otters-passing-network/).
