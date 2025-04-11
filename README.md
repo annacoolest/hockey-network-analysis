@@ -33,6 +33,7 @@ head(hockeydata)
 ```
 
 
+![A network showing every Colorado Avalanche player that scored a point during the Stanley Cup Final, connected by the passes they made to score the points.]( )
 
 
 Here, the player *making* the pass is player 1, and the player *receiving* the pass is player 2. If a goal is scored, than the player receiving the pass is the goalie from the opposing team, marked with "G". This edgelist format was inspired by hockey analyst Ryan Stimson's 2015 passing [network analysis](https://hockey-graphs.com/2015/11/09/the-2015-ohl-final-part-one-erie-otters-passing-network/).
